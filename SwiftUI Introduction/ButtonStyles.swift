@@ -14,7 +14,7 @@ struct SquareButtonStyle: ViewModifier {
 		if isSelected {
 			toUseColour = Color.green
 		} else {
-			toUseColour = Color("NotSelectedButtonColour")
+			toUseColour = Color.green.opacity(0.5)
 		}
 	}
 	

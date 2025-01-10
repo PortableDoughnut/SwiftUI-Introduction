@@ -8,8 +8,11 @@
 import SwiftUI
 
 struct ContentView: View {
-	@State var selectedSport: Int = 0
+	@State var selectedSportIndex: Int = 0
 	@State var submitSelected: Bool = false
+	@State var didSubmit: Bool = false
+	@State var selectedSport: String = "Golf"
+	@State var submitText: String = ""
 	
     var body: some View {
         VStack {
@@ -21,25 +24,29 @@ struct ContentView: View {
 			
 			HStack {
 				Button("Golf") {
-					selectedSport = 0
-				}.modifier(SquareButtonStyle(isSelected: selectedSport == 0))
+					selectedSportIndex = 0
+					selectedSport = "Golf"
+				}.modifier(SquareButtonStyle(isSelected: selectedSportIndex == 0))
 				
 				Button("Football") {
-					selectedSport = 1
+					selectedSportIndex = 1
+					selectedSport = "Football"
 				}
-				.modifier(SquareButtonStyle(isSelected: selectedSport == 1))
+				.modifier(SquareButtonStyle(isSelected: selectedSportIndex == 1))
 			}
 			
 			HStack {
 				Button("Soccer") {
-					selectedSport = 2
+					selectedSportIndex = 2
+					selectedSport = "Soccer"
 				}
-				.modifier(SquareButtonStyle(isSelected: selectedSport == 2))
+				.modifier(SquareButtonStyle(isSelected: selectedSportIndex == 2))
 				
 				Button("Baseball") {
-					selectedSport = 3
+					selectedSportIndex = 3
+					selectedSport = "Baseball"
 				}
-				.modifier(SquareButtonStyle(isSelected: selectedSport == 3))
+				.modifier(SquareButtonStyle(isSelected: selectedSportIndex == 3))
 			}
 			Spacer()
 			
@@ -49,8 +56,12 @@ struct ContentView: View {
 					try await Task.sleep(for: .seconds(0.25))
 					submitSelected = false
 				}
+				
+				submitText = "You choose \(selectedSport)!"
 			}
 			.modifier(SubmitButtonStyle(isSelected: submitSelected))
+			
+			Text(submitText)
         }
         .padding()
     }
