@@ -7,7 +7,17 @@
 
 import SwiftUI
 
-struct SquareButtonStyle: ViewModifier {
+struct SquareButtonStyle: ButtonStyle {
+	func makeBody(configuration: Configuration) -> some View {
+		configuration.label
+		.font(.headline)
+		.foregroundColor(.white)
+		.frame(width: 100, height: 100)
+		.padding()
+		.background(toUseColour)
+		.cornerRadius(18)
+	}
+	
 	var toUseColour: Color
 	
 	init(isSelected: Bool = false) {
@@ -17,19 +27,18 @@ struct SquareButtonStyle: ViewModifier {
 			toUseColour = Color.green.opacity(0.5)
 		}
 	}
-	
-	func body(content: Content) -> some View {
-		content
-			.font(.headline)
-			.foregroundColor(.white)
-			.frame(width: 100, height: 100)
-			.padding()
-			.background(toUseColour)
-			.cornerRadius(18)
-	}
 }
 
-struct SubmitButtonStyle: ViewModifier {
+struct SubmitButtonStyle: ButtonStyle {
+	func makeBody(configuration: Configuration) -> some View {
+		configuration.label
+			.foregroundColor(.white)
+			.frame(width: 280, height: 50)
+			.background(toUseColour)
+			.cornerRadius(13)
+			.padding(.bottom, 61)
+	}
+	
 	var toUseColour: Color
 	
 	init(isSelected: Bool = false) {
@@ -39,14 +48,5 @@ struct SubmitButtonStyle: ViewModifier {
 			case false:
 				toUseColour = Color.blue
 		}
-	}
-	
-	func body(content: Content) -> some View {
-		content
-			.foregroundColor(.white)
-			.frame(width: 280, height: 50)
-			.background(toUseColour)
-			.cornerRadius(13)
-			.padding(.bottom, 61)
 	}
 }

@@ -63,7 +63,7 @@ struct ContentView: View {
 				guard !selectedSport.isEmpty else { return }
 				submitText = "You choose \(selectedSport)!"
 			}
-			.modifier(SubmitButtonStyle(isSelected: submitSelected))
+			.buttonStyle(SubmitButtonStyle(isSelected: submitSelected))
 			
 			Text(submitText)
         }

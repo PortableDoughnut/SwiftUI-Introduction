@@ -17,7 +17,7 @@ struct SportButton: View {
 		Button(sport.name) {
 			selectedSportID = sport.id
 			selectedSport = sport.name
-		}.modifier(SquareButtonStyle(isSelected: selectedSportID == sport.id))
+		}.buttonStyle(SquareButtonStyle(isSelected: selectedSportID == sport.id))
     }
 }
 
