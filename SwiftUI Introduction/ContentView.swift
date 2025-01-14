@@ -6,13 +6,16 @@
 //
 
 import SwiftUI
+import Foundation
 
 struct ContentView: View {
-	@State var selectedSportIndex: Int = 0
+	@State var selectedSportID: UUID = .init()
 	@State var submitSelected: Bool = false
 	@State var didSubmit: Bool = false
-	@State var selectedSport: String = "Golf"
+	@State var selectedSport: String = ""
 	@State var submitText: String = ""
+	
+	@State var sports: Array<Sport> = Sport.sportsToUse
 	
     var body: some View {
         VStack {
@@ -23,30 +26,30 @@ struct ContentView: View {
 			Spacer()
 			
 			HStack {
-				Button("Golf") {
-					selectedSportIndex = 0
-					selectedSport = "Golf"
-				}.modifier(SquareButtonStyle(isSelected: selectedSportIndex == 0))
+				SportButton(
+					sport: $sports[0],
+					selectedSportID: $selectedSportID,
+					selectedSport: $selectedSport
+				)
 				
-				Button("Football") {
-					selectedSportIndex = 1
-					selectedSport = "Football"
-				}
-				.modifier(SquareButtonStyle(isSelected: selectedSportIndex == 1))
+				SportButton(
+					sport: $sports[1],
+					selectedSportID: $selectedSportID,
+					selectedSport: $selectedSport
+				)
 			}
 			
 			HStack {
-				Button("Soccer") {
-					selectedSportIndex = 2
-					selectedSport = "Soccer"
-				}
-				.modifier(SquareButtonStyle(isSelected: selectedSportIndex == 2))
-				
-				Button("Baseball") {
-					selectedSportIndex = 3
-					selectedSport = "Baseball"
-				}
-				.modifier(SquareButtonStyle(isSelected: selectedSportIndex == 3))
+				SportButton(
+					sport: $sports[2],
+					selectedSportID: $selectedSportID,
+					selectedSport: $selectedSport
+				)
+				SportButton(
+					sport: $sports[3],
+					selectedSportID: $selectedSportID,
+					selectedSport: $selectedSport
+				)
 			}
 			Spacer()
 			
@@ -57,6 +60,7 @@ struct ContentView: View {
 					submitSelected = false
 				}
 				
+				guard !selectedSport.isEmpty else { return }
 				submitText = "You choose \(selectedSport)!"
 			}
 			.modifier(SubmitButtonStyle(isSelected: submitSelected))
